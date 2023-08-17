@@ -37,7 +37,7 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
-//salem for example
+//sheko for example
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
