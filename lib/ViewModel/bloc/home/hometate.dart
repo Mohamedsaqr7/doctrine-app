@@ -7,3 +7,6 @@ class GetAlldoctorsErrorState extends HomeState {}
 class GetProductByIDLoadingState extends HomeState {}
 class GetProductByIDSuccessState extends HomeState {}
 class GetProductByIDErrorState extends HomeState {}
+class SearchloadState extends HomeState {}
+class SearchsuccessState extends HomeState {}
+class SearcherrorState extends HomeState {}

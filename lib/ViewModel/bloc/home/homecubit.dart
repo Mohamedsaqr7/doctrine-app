@@ -9,17 +9,20 @@ import 'package:resturant/ViewModel/services/network/endpoints.dart';
 import '../../../Model/doctor.dart';
 import '../../../View/Layouts/home.dart';
 import '../../../View/Layouts/report.dart';
+import '../loccal/sharedpref/sharedkeys.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitState());
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
   List<Widget> layouts = [Home(), Report(), Notificate()];
+  var formky = GlobalKey<FormState>();
 
   int currentindex = 0;
   void changecurrentindex(index) {
     currentindex = index;
     emit(changeindex());
   }
+  TextEditingController search = TextEditingController();
 
   DoctorModel? doctormodel;
 
@@ -54,6 +57,19 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetProductByIDErrorState());
       print(onError);
       throw onError;
+    });
+  }
+  void Search() {
+    emit(SearchloadState());
+    DioHelper.get(
+      endpoint: Endpoint.GetDoctor,
+      token: SharedKeys.token,
+      
+    ).then((value) {
+      doctormodel = DoctorModel.fromJson(value.data);
+      emit(SearchsuccessState());
+    }).catchError((onError) {
+      emit(SearcherrorState());
     });
   }
 }

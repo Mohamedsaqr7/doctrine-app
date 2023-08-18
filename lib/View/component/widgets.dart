@@ -32,10 +32,11 @@ Widget Textfield({
   required TextInputType type,
   required IconData prefix,
   IconButton? suffix,
+  FormFieldValidator?onchanged,
   required FormFieldValidator validate,
   bool ispassword = false,
 }) =>
-    TextFormField(
+    TextFormField(onChanged: onchanged,
       validator: validate,
       showCursor: true,
       keyboardType: type,

@@ -26,6 +26,7 @@ import 'View/component/home/homewidget.dart';
 import 'View/screens/Confirm.dart';
 import 'View/screens/homescreen.dart';
 import 'View/screens/payment.dart';
+import 'View/screens/search.dart';
 import 'View/screens/userinfo.dart';
 import 'ViewModel/bloc/Login/logcubit.dart';
 import 'ViewModel/bloc/blocobserver/observer.dart';
@@ -69,8 +70,8 @@ class MyApp extends StatelessWidget {
           splitScreenMode: true,
           builder: (BuildContext context, Widget? child) {
             return MaterialApp(
-                debugShowCheckedModeBanner: false, home: Details()
-                //(SharedPreference.get(SharedKeys.IsLogin)??false)?HomeScreen():SignIn(),
+                debugShowCheckedModeBanner: false, home: 
+                (SharedPreference.get(SharedKeys.IsLogin)??false)?HomeScreen():SignIn(),
                 );
           },
         ));
