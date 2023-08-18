@@ -24,19 +24,23 @@ class LogCubit extends Cubit<LogState> {
     emit(showpassstate());
   }
 
+  Information? infor;
   PersonModel? personmodel;
 
   void Login() async {
     emit(logloadingstate());
     DioHelper.post(
-        endpoint: '${Endpoint.Regester}/${Endpoint.Login}',
+        endpoint: Endpoint.Login,
         data: {'email': email.text, 'password': password.text}).then(
       (value) {
         print(value.data);
         if (value.data['code'] == 200 || value.data['code'] == 201) {
-          SharedPreference.set(SharedKeys.token, personmodel?.token);
-
-          // personmodel = PersonModel.fromJson(value.data);
+          // SharedPreference.set(SharedKeys.token, personmodel?.token);
+          if (infor != null) {
+            CashUserData(infor!);
+            SharedPreference.set(SharedKeys.IsLogin, true);
+          }
+          infor = Information.fromJson(value.data);
           emit(logsuccessstate());
         }
       },
@@ -46,7 +50,8 @@ class LogCubit extends Cubit<LogState> {
   }
 
   void CashUserData(Information info) {
-    SharedPreference.set(SharedKeys.Userid, info.id);
-    SharedPreference.set(SharedKeys.Username, info.name);
+    SharedPreference.set(SharedKeys.Userid, infor?.id);
+    SharedPreference.set(SharedKeys.Username, infor?.name);
+    SharedPreference.set(SharedKeys.token, personmodel?.token);
   }
 }

@@ -37,6 +37,7 @@ class PersonModel {
 
 class Information {
   String? name;
+  
   String? image;
   double? age;
   String? password;

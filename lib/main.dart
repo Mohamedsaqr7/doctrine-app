@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:resturant/View/Layouts/report.dart';
 import 'package:resturant/View/screens/detail.dart';
 import 'package:resturant/ViewModel/bloc/SignUp/signcubit.dart';
 import 'package:resturant/ViewModel/bloc/admin/admincubit.dart';
@@ -28,6 +29,7 @@ import 'View/screens/payment.dart';
 import 'View/screens/userinfo.dart';
 import 'ViewModel/bloc/Login/logcubit.dart';
 import 'ViewModel/bloc/blocobserver/observer.dart';
+import 'ViewModel/bloc/loccal/sharedpref/sharedkeys.dart';
 import 'ViewModel/services/network/diohelper.dart';
 
 Future<void> main() async {
@@ -37,6 +39,7 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
+
 //sheko for example
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -66,9 +69,9 @@ class MyApp extends StatelessWidget {
           splitScreenMode: true,
           builder: (BuildContext context, Widget? child) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: HomeScreen(),
-            );
+                debugShowCheckedModeBanner: false, home: Details()
+                //(SharedPreference.get(SharedKeys.IsLogin)??false)?HomeScreen():SignIn(),
+                );
           },
         ));
   }

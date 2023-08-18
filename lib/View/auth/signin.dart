@@ -18,7 +18,9 @@ class SignIn extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<LogCubit, LogState>(
         listener: (context, state) {
-          if (state is logerrorstate) {
+          if (state is logsuccessstate) {
+            Navigation.gopush(context, OnBoarding());
+          } else if (state is logerrorstate) {
             toast(
                 message: 'error',
                 bcolor: Colors.red,
@@ -87,7 +89,7 @@ class SignIn extends StatelessWidget {
                         onTap: () {
                           if (cubit.formkey.currentState!.validate()) {
                             cubit.Login();
-                            Navigation.gopushreplace(context, OnBoarding());
+                            //Navigation.gopushreplace(context, OnBoarding());
                             print('welcome');
                           }
                           return null;
@@ -100,8 +102,14 @@ class SignIn extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.blueAccent,
                           ),
-                          child: text1(
-                              text: 'LogIn', color: Colors.white, size: 35),
+                          child: 
+                          state is logloadingstate?
+                              text1(
+                                  text: 'LogIn', color: Colors.white, size: 35):
+                                  CircularProgressIndicator.adaptive(
+                                  backgroundColor: Colors.red,
+                                )
+                              
                         ),
                       ),
                       SizedBox(

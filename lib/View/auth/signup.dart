@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:resturant/View/component/widgets.dart';
 
 import '../../ViewModel/bloc/SignUp/signcubit.dart';
@@ -18,6 +19,15 @@ class SignUp extends StatelessWidget {
     return Scaffold(
         body: BlocConsumer<SignCubit, SignState>(
       listener: (context, state) {
+        if (state is signssuccesstate) {
+          Navigation.gopushreplace(context, OnBoarding());
+        } else if (State is signerrorstate) {
+          toast(
+              message: 'error',
+              bcolor: Colors.red,
+              tcolor: Colors.white,
+              gravity: ToastGravity.BOTTOM);
+        }
         // TODO: implement listener
       },
       builder: (context, state) {
@@ -81,7 +91,7 @@ class SignUp extends StatelessWidget {
                                 controller: cubit.email,
                                 errormessage: 'enter email',
                                 type: TextInputType.emailAddress),
-                            
+
                             sbox(h: 10.h),
                             Textfield(
                                 validate: (value) {
@@ -161,9 +171,7 @@ class SignUp extends StatelessWidget {
                               onTap: () {
                                 if (cubit.formkey1.currentState!.validate() ||
                                     cubit.password == cubit.password1) {
-                                  Navigation.gopushreplace(
-                                      context, OnBoarding());
-                                cubit.register();
+                                  cubit.register();
 
                                   print('welcome');
                                 }
@@ -176,10 +184,14 @@ class SignUp extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
                                 ),
-                                child: text2(
-                                  text: 'SignUp',
-                                  color: Color.fromARGB(255, 5, 110, 196),
-                                ),
+                                child: state is signsloadingtate
+                                    ? text2(
+                                        text: 'SignUp',
+                                        color: Color.fromARGB(255, 5, 110, 196),
+                                      )
+                                    : CircularProgressIndicator.adaptive(
+                                        backgroundColor: Colors.white,
+                                      ),
                               ),
                             ),
 

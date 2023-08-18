@@ -10,7 +10,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  BlocProvider.value(
+        value: HomeCubit.get(context)..Getalldoctors(),
+        child:Scaffold(
       body: BlocProvider.value(
         value: HomeCubit.get(context),
         child: BlocConsumer<HomeCubit, HomeState>(
@@ -59,6 +61,6 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ),
-    );
+     ) );
   }
 }

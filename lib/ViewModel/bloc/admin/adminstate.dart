@@ -12,3 +12,6 @@ class updateerrorState extends AdminState{}
 class deleteloadingState extends AdminState{}
 class deletesuccessState extends AdminState{}
 class deleteerrorState extends AdminState{}
+class GetAllLoadingState extends AdminState{}
+class GetAllSuccessState extends AdminState{}
+class GetAllErrorState extends AdminState{}

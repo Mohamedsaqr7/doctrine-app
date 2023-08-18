@@ -40,7 +40,7 @@ class Doccubit extends Cubit<Docstate> {
     emit(Docloadingtstate());
     await DioHelper.post(
         endpoint: Endpoint.Addpatient,
-        token: SharedPreference.get(SharedKeys.token),
+       // token: SharedPreference.get(SharedKeys.token),
         data: {
           'name': name.text,
           'date_of_birth': date_of_birth.text,

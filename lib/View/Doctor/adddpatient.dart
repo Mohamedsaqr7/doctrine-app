@@ -106,15 +106,58 @@ class Addpatient extends StatelessWidget {
                                     return null;
                                   },
                                 ),
-                                sbox(h: 20.h),
+                                sbox(h: 20.h), TextFormField(
+                                  cursorColor: Color.fromARGB(255, 18, 4, 139),
+                                  controller: cubit.date_of_birth,
+                                  keyboardType: TextInputType.none,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                  ),
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20.r),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20.r),
+                                      ),
+                                      prefixIcon: Icon(Icons.access_time_rounded),
+                                      prefixIconColor:
+                                          Color.fromARGB(255, 5, 110, 196),
+                                      label: Text('date of birth',
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 5, 110, 196))),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.r),
+                                          borderSide: BorderSide(
+                                              color: Color.fromARGB(
+                                                  255, 226, 16, 16))),
+                                      suffixIconColor:
+                                          Color.fromARGB(255, 5, 110, 196)),
+                                  onTap: (() {
+                                    showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime(2020),
+                                            lastDate: DateTime(2024))
+                                        .then((value) => cubit.date_of_birth.text =
+                                            value?.toString() ?? '');
+                                  }),
+                                ),
+                                SizedBox(
+                                  height: 20.h,
+                                ),
                                 Textfield(
                                   controller: cubit.diagnosis,
-                                  label: 'description',
+                                  label: 'diagnosis',
                                   type: TextInputType.text,
                                   prefix: Icons.description,
                                   validate: (value) {
                                     if (value!.trim().isEmpty)
-                                      return 'enter description';
+                                      return 'enter diagnosis';
                                     return null;
                                   },
                                 ),
@@ -172,50 +215,7 @@ class Addpatient extends StatelessWidget {
                                   }),
                                 ),                              sbox(h: 20.h),
                 
-                                TextFormField(
-                                  cursorColor: Color.fromARGB(255, 18, 4, 139),
-                                  controller: cubit.date_of_birth,
-                                  keyboardType: TextInputType.none,
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                  ),
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20.r),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20.r),
-                                      ),
-                                      prefixIcon: Icon(Icons.access_time_rounded),
-                                      prefixIconColor:
-                                          Color.fromARGB(255, 5, 110, 196),
-                                      label: Text('date of birth',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 5, 110, 196))),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.r),
-                                          borderSide: BorderSide(
-                                              color: Color.fromARGB(
-                                                  255, 226, 16, 16))),
-                                      suffixIconColor:
-                                          Color.fromARGB(255, 5, 110, 196)),
-                                  onTap: (() {
-                                    showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(2020),
-                                            lastDate: DateTime(2024))
-                                        .then((value) => cubit.date_of_birth.text =
-                                            value?.toString() ?? '');
-                                  }),
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
+                               
                                 InkWell(
                                   onTap: () {
                                     if (cubit.keyy1.currentState!.validate()) {

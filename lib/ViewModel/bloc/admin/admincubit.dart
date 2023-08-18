@@ -27,6 +27,20 @@ class AdminCubit extends Cubit<AdminState> {
 
   DoctorModel? doctormodel;
   Information? information;
+
+  void Getdoctors() {
+    emit(GetAllLoadingState());
+    DioHelper.get(
+      endpoint: Endpoint.GetDoctor,
+              token: SharedPreference.get(SharedKeys.token),
+
+    ).then((value) {
+      doctormodel = DoctorModel.fromJson(value.data);
+      emit(GetAllSuccessState());
+    }).catchError((onError) {
+      emit(GetAllErrorState());
+    });
+  }
   void AddDoctor() async {
     emit(AdminloadingState());
     await DioHelper.post(
